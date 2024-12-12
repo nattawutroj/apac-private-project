@@ -89,7 +89,7 @@ export default function AppLayout({
               />
             </div>
           </Link>
-          <Link href="/app">
+          <Link href="/app/reports">
             <div
               className={`p-2 rounded-full ${
                 pathname === "/app/reports" ? "bg-gray-200/70" : "bg-transparent"
