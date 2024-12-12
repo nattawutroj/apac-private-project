@@ -1,4 +1,5 @@
 "use client";
+
 import { TriangleAlertIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
@@ -7,50 +8,48 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { supabase } from "@/utils/supabase/subscribing";
-import { toast } from "@/hooks/use-toast";
+import { useQuery } from "@tanstack/react-query";
+import { createClient } from "@/utils/supabase/client";
+import { formatDistanceToNow } from "date-fns";
 
 export const Alerts = () => {
-  const channel = supabase
-    .channel("schema-db-changes")
-    .on(
-      "postgres_changes",
-      {
-        event: "INSERT",
-        schema: "public",
-      },
-      //   (payload) => console.log(payload)
-      (payload) =>
-        toast({
-          variant: "destructive",
-          title: payload.new.event_type,
-          description: payload.new.even_description,
-        })
-    )
-    .subscribe();
+  const { data } = useQuery({
+    queryKey: ["highRiskAlert"],
+    queryFn: async () => {
+      const supabase = createClient();
 
-  console.log(channel);
+      const { data } = await supabase
+        .from("alert")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .gte("risk", 5)
+        .limit(1)
+        .single();
 
-  return (
-    <Alert variant={"destructive"}>
-      <TriangleAlertIcon className="h-4 w-4" />
-      <AlertTitle>Bangkok, 6 min ago</AlertTitle>
-      <AlertDescription>
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger color="text-red-500">
-              Gathering and Demonstrations
-            </AccordionTrigger>
-            <AccordionContent>
-              More than 100 protesters from multiple political activist groups
-              will demonstrate at the 14th October 1973 Memorial in Bangkok
-              starting at 12:00 PM (local time) tomorrow. The protest aims to
-              denounce Prime Minister Paetongtarn Shinawatra and former Prime
-              Minister Thaksin Shinawatra.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </AlertDescription>
-    </Alert>
-  );
+      return data;
+    },
+  });
+
+  if (data)
+    return (
+      <Alert variant={"destructive"}>
+        <TriangleAlertIcon className="h-4 w-4" />
+        <AlertTitle>
+          {data?.place},{" " + formatDistanceToNow(new Date(data?.date || 0))}{" "}
+          ago
+        </AlertTitle>
+        <AlertDescription>
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger color="text-red-500">
+                {data.event_type}
+              </AccordionTrigger>
+              <AccordionContent>{data.even_description}</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </AlertDescription>
+      </Alert>
+    );
+
+  return null;
 };
