@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Accordion,
@@ -17,16 +17,20 @@ import { createClient } from "@/utils/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 
-export const AllAlerts = () => {
+export const AllAlerts = ({ limit }: { limit?: number }) => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["AllAlerts"],
+    queryKey: ["AllAlerts", limit],
     queryFn: async () => {
       const supabase = createClient();
 
-      const { data, error } = await supabase
+      let query = supabase
         .from("alert")
         .select("*")
         .order("created_at", { ascending: false });
+
+      if (limit) query = query.limit(limit);
+
+      const { data, error } = await query;
 
       if (error) {
         throw new Error(error.message);

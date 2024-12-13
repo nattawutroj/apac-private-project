@@ -37,16 +37,20 @@ export type Database = {
           even_description: string
           event_type: string
           id: string
+          lat: number | null
+          long: number | null
           place: string
           risk: number
           source: string
         }
         Insert: {
           created_at?: string
-          date: string
+          date?: string
           even_description: string
           event_type: string
           id?: string
+          lat?: number | null
+          long?: number | null
           place: string
           risk?: number
           source: string
@@ -57,6 +61,8 @@ export type Database = {
           even_description?: string
           event_type?: string
           id?: string
+          lat?: number | null
+          long?: number | null
           place?: string
           risk?: number
           source?: string

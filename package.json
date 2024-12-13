@@ -19,6 +19,7 @@
     "@tanstack/react-query": "^5.62.3",
     "@tanstack/react-query-devtools": "^5.62.3",
     "@tanstack/zod-form-adapter": "^0.39.0",
+    "@types/leaflet.heat": "^0.2.4",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
