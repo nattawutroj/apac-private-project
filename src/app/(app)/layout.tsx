@@ -113,7 +113,18 @@ export default function AppLayout({
                 </span>
               </div>
             </Link>
+            <Link href="/logout">
+              <div className={`p-2`}>
+                <span className={`text-red-500`}>Logout</span>
+              </div>
+            </Link>
           </div>
+
+          <Link className="md:hidden" href="/logout">
+            <div className={`p-2`}>
+              <span className={`text-red-500`}>Logout</span>
+            </div>
+          </Link>
         </div>
       </div>
       <div className="flex-grow mb-16 md:mb-0">

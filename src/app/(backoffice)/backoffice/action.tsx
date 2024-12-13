@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 import { useCallback } from "react";
 
 export const Action = () => {
@@ -246,6 +247,11 @@ export const Action = () => {
       <Button onClick={AIHRisk}>Add Incidents High Risk</Button>
       <Button onClick={RHRisk}>Reset High Risk</Button>
       <Button onClick={Clear}>Clear Default</Button>
+      <Link href="/logout" className="w-full">
+        <Button variant={"destructive"} className="mt-12 w-full" onClick={Clear}>
+          Logout
+        </Button>
+      </Link>
     </div>
   );
 };
