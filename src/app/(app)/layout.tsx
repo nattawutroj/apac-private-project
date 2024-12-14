@@ -113,14 +113,14 @@ export default function AppLayout({
                 </span>
               </div>
             </Link>
-            <Link href="/logout">
+            <Link href="/auth">
               <div className={`p-2`}>
                 <span className={`text-red-500`}>Logout</span>
               </div>
             </Link>
           </div>
 
-          <Link className="md:hidden" href="/logout">
+          <Link className="md:hidden" href="/auth">
             <div className={`p-2`}>
               <span className={`text-red-500`}>Logout</span>
             </div>
