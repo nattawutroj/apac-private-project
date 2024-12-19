@@ -10,6 +10,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, Suspense } from "react";
 import { usePathname } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useDvalue } from "@/providers/dvalue";
 
 export default function AppLayout({
   children,
@@ -18,7 +26,7 @@ export default function AppLayout({
 }>) {
   const queryClient = useQueryClient();
   const pathname = usePathname();
-
+  const { Dvalue, setDvalue } = useDvalue();
   useEffect(() => {
     const channel = supabase
       .channel("schema-db-changes")
@@ -30,11 +38,15 @@ export default function AppLayout({
           table: "alert",
         },
         (payload: any) => {
-          queryClient.invalidateQueries({ queryKey: ["highRiskAlert"] });
-          queryClient.invalidateQueries({ queryKey: ["latestAlert"] });
-          queryClient.invalidateQueries({ queryKey: ["AllAlerts"] });
-          queryClient.invalidateQueries({ queryKey: ["AllAlertsMaps"] });
-          queryClient.invalidateQueries({ queryKey: ["AllAlerts", 6] });
+          queryClient.invalidateQueries({
+            queryKey: ["highRiskAlert", Dvalue],
+          });
+          queryClient.invalidateQueries({ queryKey: ["latestAlert", Dvalue] });
+          queryClient.invalidateQueries({ queryKey: ["AllAlerts", Dvalue] });
+          queryClient.invalidateQueries({
+            queryKey: ["AllAlertsMaps", Dvalue],
+          });
+          queryClient.invalidateQueries({ queryKey: ["AllAlerts", 6, Dvalue] });
           if (payload) {
             toast({
               variant: "destructive",
@@ -49,18 +61,30 @@ export default function AppLayout({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [queryClient]);
+  }, [queryClient, Dvalue]);
 
   return (
     <div className="relative min-h-screen flex flex-col">
       <div className="sticky top-0 z-40 h-16 w-full bg-white shadow">
         <div className="container mx-auto flex h-full items-center justify-between px-4">
-          <Image
-            src={apacLogo}
-            alt="apceLogo"
-            width={150}
-            className="h-3/5 w-auto"
-          />
+          <div className="flex items-center">
+            <Image
+              src={apacLogo}
+              alt="apceLogo"
+              width={150}
+              className="h-3/5 w-auto"
+            />
+            <Select value={Dvalue} onValueChange={(value) => setDvalue(value)}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Area" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All</SelectItem>
+                <SelectItem value="TH">Thailand</SelectItem>
+                <SelectItem value="TL">Timor Leste</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="gap-4 hidden md:flex">
             <Link href="/app">
               <div

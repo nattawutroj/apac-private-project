@@ -5,25 +5,31 @@ import * as L from "leaflet";
 import "leaflet.heat";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/utils/supabase/client";
+import { useDvalue } from "@/providers/dvalue";
 
 const HeatMapNoSSR: React.FC = () => {
   const [shouldRender, setShouldRender] = useState<boolean>(true);
   const mapRef = useRef<HTMLDivElement | null>(null);
   const leafletMapRef = useRef<L.Map | null>(null);
+  const { Dvalue } = useDvalue();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["AllAlertsMaps"],
+    queryKey: ["AllAlertsMaps", Dvalue],
     queryFn: async () => {
       const supabase = createClient();
 
-      const { data, error } = await supabase
+      let query;
+
+      query = supabase
         .from("alert")
         .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) {
-        throw new Error(error.message);
+      if (Dvalue && Dvalue !== "All") {
+        query = query.eq("area", Dvalue);
       }
+
+      const { data } = await query;
 
       return data;
     },
@@ -43,13 +49,21 @@ const HeatMapNoSSR: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    let point: [number, number] = [13.754498619763352, 100.47889378225727];
+    let zoom: number = 2;
+    if (Dvalue === "TH") {
+      point = [13.754498619763352, 100.47889378225727];
+      zoom = 5
+    }
+    if (Dvalue === "TL") {
+      point = [-8.756776680377733, 125.89933808131748];
+      zoom = 6
+    }
+
     if (!shouldRender || leafletMapRef.current) return;
 
     if (mapRef.current) {
-      const map = L.map(mapRef.current).setView(
-        [13.754498619763352, 100.47889378225727],
-        6
-      );
+      const map = L.map(mapRef.current).setView(point, zoom);
       leafletMapRef.current = map;
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

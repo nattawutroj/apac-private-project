@@ -32,6 +32,7 @@ export type Database = {
       }
       alert: {
         Row: {
+          area: string | null
           created_at: string
           date: string
           even_description: string
@@ -44,6 +45,7 @@ export type Database = {
           source: string
         }
         Insert: {
+          area?: string | null
           created_at?: string
           date?: string
           even_description: string
@@ -56,6 +58,7 @@ export type Database = {
           source: string
         }
         Update: {
+          area?: string | null
           created_at?: string
           date?: string
           even_description?: string

@@ -14,6 +14,12 @@ export const Action = () => {
     return { lat, long };
   };
 
+  const getRandomCoordinatesInTimorLeste = () => {
+    const lat = parseFloat((Math.random() * (-8 - -9.5) + -9.5).toFixed(6)); // Lat range for Timor-Leste
+    const long = parseFloat((Math.random() * (127 - 124) + 124).toFixed(6)); // Long range for Timor-Leste
+    return { lat, long };
+  };
+
   const getRandomNews = () => {
     const descriptions = [
       {
@@ -22,6 +28,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -29,6 +36,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -36,6 +44,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -43,6 +52,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "New Laws",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -50,6 +60,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -57,6 +68,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -64,6 +76,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "New Laws",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -71,6 +84,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -78,6 +92,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -85,6 +100,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -92,6 +108,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -99,6 +116,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -106,6 +124,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -113,6 +132,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Trat",
+        area: "TH",
       },
       {
         event_description:
@@ -120,6 +140,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -127,6 +148,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "New Laws",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -134,6 +156,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -141,6 +164,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -148,6 +172,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -155,6 +180,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "New Laws",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -162,6 +188,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "New Laws",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -169,6 +196,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Thailand",
+        area: "TH",
       },
       {
         event_description:
@@ -176,6 +204,7 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "Security Announcements",
         place: "Pattani",
+        area: "TH",
       },
       {
         event_description:
@@ -183,6 +212,7 @@ export const Action = () => {
         source: "APAC Alerts",
         event_type: "Gathering and Demonstrations",
         place: "Bangkok",
+        area: "TH",
       },
       {
         event_description:
@@ -190,18 +220,146 @@ export const Action = () => {
         source: "Southeast Asia Updates",
         event_type: "New Laws",
         place: "Thailand",
+        area: "TH",
       },
     ];
 
     return descriptions[Math.floor(Math.random() * descriptions.length)];
   };
 
+  const getRandomNewsTL = () => {
+    const descriptions = [
+      {
+        event_description:
+          "The government of Timor-Leste has announced a nationwide vaccination campaign to combat a rising dengue outbreak.",
+        source: "Timor Health Updates",
+        event_type: "Health Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Heavy rains are expected to cause flooding in several districts of Timor-Leste over the next three days.",
+        source: "Timor Weather Alerts",
+        event_type: "Weather Updates",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Thousands of citizens gathered in Dili to demand reforms in education and healthcare sectors.",
+        source: "Timor News Network",
+        event_type: "Gathering and Demonstrations",
+        place: "Dili",
+        area: "TL",
+      },
+      {
+        event_description:
+          "The government has extended its agricultural subsidy program to support local farmers affected by drought conditions.",
+        source: "Timor Agriculture Updates",
+        event_type: "Government Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Timor-Leste's Ministry of Energy has signed a new agreement to explore renewable energy projects across the country.",
+        source: "Energy Updates Timor",
+        event_type: "Energy Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "The National Police of Timor-Leste has increased security in Dili following reports of planned demonstrations over labor rights.",
+        source: "Timor Security Alerts",
+        event_type: "Security Announcements",
+        place: "Dili",
+        area: "TL",
+      },
+      {
+        event_description:
+          "A new law to regulate fisheries and promote sustainable practices has been introduced in the parliament of Timor-Leste.",
+        source: "Timor Legal Updates",
+        event_type: "New Laws",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "The Ministry of Tourism has launched a campaign to promote Timor-Leste as an eco-tourism destination.",
+        source: "Timor Tourism Updates",
+        event_type: "Tourism Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Timor-Leste is set to host a regional economic forum next month to strengthen trade ties with neighboring countries.",
+        source: "Regional News Timor",
+        event_type: "Economic Announcements",
+        place: "Dili",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Local communities in rural Timor-Leste are set to benefit from a new water supply project funded by international donors.",
+        source: "Timor Development News",
+        event_type: "Development Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "The President of Timor-Leste has urged citizens to participate in upcoming consultations on the country's economic strategy for 2025.",
+        source: "Timor Presidential Updates",
+        event_type: "Political Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Security forces in Timor-Leste have been placed on alert following intelligence reports of potential unrest in key urban areas.",
+        source: "Timor Security Alerts",
+        event_type: "Security Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "A public protest is planned in Dili to raise awareness about environmental degradation caused by deforestation.",
+        source: "Environmental Updates Timor",
+        event_type: "Gathering and Demonstrations",
+        place: "Dili",
+        area: "TL",
+      },
+      {
+        event_description:
+          "The Timor-Leste government is in talks with international organizations to improve access to education in remote areas.",
+        source: "Education Updates Timor",
+        event_type: "Development Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+      {
+        event_description:
+          "Timor-Leste's parliament has approved a new budget focused on infrastructure and healthcare development.",
+        source: "Timor Budget News",
+        event_type: "Government Announcements",
+        place: "Timor-Leste",
+        area: "TL",
+      },
+    ];
+
+    return descriptions[Math.floor(Math.random() * descriptions.length)];
+  };
   const AILRisk = useCallback(async () => {
     const { lat, long } = getRandomCoordinatesInThailand();
     await supabase.from("alert").insert({
       even_description: getRandomNews().event_description,
       event_type: getRandomNews().event_type,
       place: getRandomNews().place,
+      area: getRandomNews().area,
       source: getRandomNews().source,
       risk: 4,
       lat,
@@ -215,7 +373,36 @@ export const Action = () => {
       even_description: getRandomNews().event_description,
       event_type: getRandomNews().event_type,
       place: getRandomNews().place,
+      area: getRandomNews().area,
       source: getRandomNews().source,
+      risk: 7,
+      lat,
+      long,
+    });
+  }, []);
+
+  const TLAILRisk = useCallback(async () => {
+    const { lat, long } = getRandomCoordinatesInTimorLeste();
+    await supabase.from("alert").insert({
+      even_description: getRandomNewsTL().event_description,
+      event_type: getRandomNewsTL().event_type,
+      place: getRandomNewsTL().place,
+      area: getRandomNewsTL().area,
+      source: getRandomNewsTL().source,
+      risk: 4,
+      lat,
+      long,
+    });
+  }, []);
+
+  const TLAIHRisk = useCallback(async () => {
+    const { lat, long } = getRandomCoordinatesInTimorLeste();
+    await supabase.from("alert").insert({
+      even_description: getRandomNewsTL().event_description,
+      event_type: getRandomNewsTL().event_type,
+      place: getRandomNewsTL().place,
+      area: getRandomNewsTL().area,
+      source: getRandomNewsTL().source,
       risk: 7,
       lat,
       long,
@@ -229,26 +416,45 @@ export const Action = () => {
   const Clear = useCallback(async () => {
     await supabase.from("alert").delete().neq("risk", 0);
     const { lat, long } = getRandomCoordinatesInThailand();
+    const { lat: latTL, long: longTL } = getRandomCoordinatesInTimorLeste();
     await supabase.from("alert").insert({
       even_description:
         "More than 100 protesters from multiple political activist groups will demonstrate at the 14th October 1973 Memorial in Bangkok starting at 12:00 PM (local time) tomorrow. The protest aims to denounce Prime Minister Paetongtarn Shinawatra and former Prime Minister Thaksin Shinawatra.",
       event_type: "Gathering and Demonstrations",
       place: "Bangkok",
+      area: "TH",
       source: "APAC Alerts",
       risk: 4,
       lat,
       long,
     });
+    await supabase.from("alert").insert({
+      even_description:
+        "Thousands of citizens gathered in Dili to demand reforms in education and healthcare sectors.",
+      event_type: "Gathering and Demonstrations",
+      place: "Dili",
+      area: "TL",
+      source: "Timor News Network",
+      risk: 4,
+      lat: latTL,
+      long: longTL,
+    });
   }, []);
 
   return (
     <div className="container flex flex-col gap-4 py-8">
-      <Button onClick={AILRisk}>Add Incidents Low Risk</Button>
-      <Button onClick={AIHRisk}>Add Incidents High Risk</Button>
+      <Button onClick={AILRisk}>Add Incidents Low Risk Thailand</Button>
+      <Button onClick={AIHRisk}>Add Incidents High Risk Thailand</Button>
+      <Button onClick={TLAILRisk}>Add Incidents Low Risk Timor Leste</Button>
+      <Button onClick={TLAIHRisk}>Add Incidents High Risk Timor Leste</Button>
       <Button onClick={RHRisk}>Reset High Risk</Button>
       <Button onClick={Clear}>Clear Default</Button>
       <Link href="/logout" className="w-full">
-        <Button variant={"destructive"} className="mt-12 w-full" onClick={Clear}>
+        <Button
+          variant={"destructive"}
+          className="mt-12 w-full"
+          onClick={Clear}
+        >
           Logout
         </Button>
       </Link>

@@ -13,22 +13,30 @@ import {
   CardAlertHeader,
   CardAlertTitle,
 } from "@/components/ui/cardAlert";
+import { useDvalue } from "@/providers/dvalue";
 import { createClient } from "@/utils/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 
 export const AlertLatest = () => {
+  const { Dvalue } = useDvalue();
   const { data } = useQuery({
-    queryKey: ["latestAlert"],
+    queryKey: ["latestAlert", Dvalue],
     queryFn: async () => {
       const supabase = createClient();
 
-      const { data } = await supabase
+      let query;
+
+      query = supabase
         .from("alert")
         .select("*")
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .single();
+        .order("created_at", { ascending: false });
+
+      if (Dvalue && Dvalue !== "All") {
+        query = query.eq("area", Dvalue);
+      }
+
+      const { data } = await query.limit(1).single();
 
       return data;
     },
